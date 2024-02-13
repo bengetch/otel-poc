@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  entrypoint_service:
+    build: ./entrypoint_service
+    ports:
+      - "${ENTRYPOINT_SVC_PORT}:5000"
+    networks:
+      - microservices_network
+
+  service_a:
+    build: ./service_a
+    ports:
+      - "${SVC_A_PORT}:5000"
+    networks:
+      - microservices_network
+
+  service_b:
+    build: ./service_b
+    ports:
+      - "${SVC_B_PORT}:5000"
+    networks:
+      - microservices_network
+
+networks:
+  microservices_network:
+    driver: bridge
