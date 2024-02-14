@@ -8,4 +8,4 @@ COPY . .
 RUN pip install -r requirements.txt --no-cache-dir
 
 # run container
-CMD ["python", "service.py"]
+CMD ["flask", "run"]

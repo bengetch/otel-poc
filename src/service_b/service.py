@@ -5,7 +5,6 @@ app = Flask(__name__)
 
 @app.route('/api', methods=['GET'])
 def home():
-    # Simulate some logic
     data = {"message": "Hello from Service B"}
     return jsonify(data)
 
