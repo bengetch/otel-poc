@@ -4,8 +4,9 @@ PoC OTel implementation
 # Usage
 
 Inside the `src` directory, create a `.env` file that matches the `.env.example` file. The contents can be 
-identical to those in the `.env.example` file. The `docker-compose.yml` file in this directory defines 4
-services:
+identical to those in the `.env.example` file. Note also that the `.env` file that you create will be distinct
+from the existing `common.env` file, which should not be modified. The `docker-compose.yml` file in this directory 
+defines 4 services:
 
 1. An `entrypoint` service that functions as a public API for testing functionalities.
 2. Two "microservices", `service_a` and `service_b`, which get called by the `entrypoint` service and can
