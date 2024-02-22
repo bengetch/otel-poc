@@ -36,7 +36,7 @@ services:
       - FLASK_RUN_PORT=5002
 
   collector:
-    image: otel/opentelemetry-collector:latest
+    image: otel/opentelemetry-collector-contrib:latest
     ports:
       - "${COLLECTOR_GRPC_PORT}:4317"
       - "${COLLECTOR_HTTP_PORT}:4318"
@@ -47,7 +47,9 @@ services:
     volumes:
       - ./otel_collector/collector-config.yml:/etc/collector-config.yml
     command: ["--config", "/etc/collector-config.yml"]
-
+    environment:
+      - DATADOG_API_KEY=${DATADOG_API_KEY}
+      - DATADOG_API_SITE=${DATADOG_API_SITE}
 
 networks:
   microservices_network:

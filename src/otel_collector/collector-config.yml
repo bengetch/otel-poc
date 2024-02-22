@@ -5,17 +5,30 @@ receivers:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
+
 exporters:
   debug:
     verbosity: detailed
+  datadog:
+    api:
+      key: "${DATADOG_API_KEY}"
+      site: "${DATADOG_API_SITE}"
+
+processors:
+  batch:
+    timeout: 5s
+    send_batch_size: 5000
+
 service:
   pipelines:
     traces:
       receivers: [otlp]
-      exporters: [debug]
+      processors: [batch]
+      exporters: [debug, datadog]
     metrics:
       receivers: [otlp]
-      exporters: [debug]
+      exporters: [debug, datadog]
     logs:
       receivers: [otlp]
+      processors: [batch]
       exporters: [debug]

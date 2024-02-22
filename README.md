@@ -15,5 +15,4 @@ do arbitrary work.
     * Note that it is possible to have `service_a` and `service_b` send their metrics/traces/logs to the 
     `collector` service by following the same configuration as the `entrypoint` service
 
-
 To deploy the services defined in `docker-compose.yml`, run `docker compose up --build`. 
