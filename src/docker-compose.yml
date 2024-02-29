@@ -12,6 +12,10 @@ services:
     environment:
       - FLASK_RUN_PORT=5000
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://collector:${COLLECTOR_GRPC_PORT}
+      - METER_NAME=entrypoint_service.meter
+      - TRACER_NAME=entrypoint_service.tracer
+    volumes:
+      - ./exporters.py:/usr/src/app/exporters.py
 
   service_a:
     build: ./service_a
@@ -23,6 +27,11 @@ services:
       - common.env
     environment:
       - FLASK_RUN_PORT=5001
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://collector:${COLLECTOR_GRPC_PORT}
+      - METER_NAME=service_a.meter
+      - TRACER_NAME=service_a.tracer
+    volumes:
+      - ./exporters.py:/usr/src/app/exporters.py
 
   service_b:
     build: ./service_b
@@ -34,6 +43,11 @@ services:
       - common.env
     environment:
       - FLASK_RUN_PORT=5002
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://collector:${COLLECTOR_GRPC_PORT}
+      - METER_NAME=service_b.meter
+      - TRACER_NAME=service_b.tracer
+    volumes:
+      - ./exporters.py:/usr/src/app/exporters.py
 
   collector:
     image: otel/opentelemetry-collector-contrib:latest

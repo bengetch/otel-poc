@@ -6,6 +6,7 @@ COPY . .
 
 # install python dependencies
 RUN pip install -r requirements.txt --no-cache-dir
+RUN opentelemetry-bootstrap -a install
 
 # run container
 CMD ["flask", "run"]
